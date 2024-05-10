@@ -1,57 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-void redirectTo(BuildContext context, String routeName) {
-  Navigator.pushNamed(context, routeName);
-}
-
-double defaultMargin = 40.0;
-double defaultMarginHome = 18.0;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 const Color primaryColor = Color.fromARGB(255, 242, 255, 242);
 const Color darkPrimaryColor = Color.fromARGB(255, 0, 0, 0);
 const Color alertColor = Color.fromARGB(255, 102, 127, 59);
 
-TextStyle darkPrimaryTextStyle = GoogleFonts.grandstander(
-  color: darkPrimaryColor,
-);
+void redirectTo(BuildContext context, String routeName) {
+  Navigator.pushNamed(context, routeName);
+}
 
-FontWeight light = FontWeight.w300;
-FontWeight regular = FontWeight.w400;
-FontWeight medium = FontWeight.w500;
-FontWeight semibold = FontWeight.w600;
-FontWeight bold = FontWeight.w700;
-FontWeight bolder = FontWeight.w900;
-
-Widget buildTextField({
-  required String hint,
-  required bool obscureText,
-  required IconData prefixIcon,
-  Color backgroundColor = Colors.white,
-  Color iconColor = Colors.black,
-  double fieldHeight = 48.0,
-}) {
-  return TextField(
-    obscureText: obscureText,
-    decoration: InputDecoration(
-      hintText: hint,
-      fillColor: backgroundColor,
-      filled: true,
-      prefixIcon: IconTheme(
-        data: IconThemeData(
-          color: iconColor,
-        ),
-        child: Icon(prefixIcon),
-      ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      contentPadding: EdgeInsets.symmetric(
-        vertical: (fieldHeight - 48.0) / 2,
-        horizontal: 12,
-      ),
-    ),
-  );
+void pindah(BuildContext context, String routeName, String accessToken) {
+  Navigator.pushReplacementNamed(context, routeName, arguments: accessToken);
 }
 
 Widget buildButton(BuildContext context, String title, VoidCallback onPressed,
@@ -76,6 +36,49 @@ Widget buildButton(BuildContext context, String title, VoidCallback onPressed,
 }
 
 class masukPage extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _login(BuildContext context) async {
+    final username = _usernameController.text.trim();
+    final password = _passwordController.text.trim();
+
+    final url = Uri.parse('http://146.190.109.66:8000/login');
+    final response = await http.post(
+      url,
+      body: jsonEncode({'username': username, 'password': password}),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // Berhasil login
+      final responseData = jsonDecode(response.body);
+      final accessToken = responseData['access_token'];
+      // Simpan token, arahkan ke halaman selanjutnya, dll.
+      print('Access token: $accessToken');
+
+      // Redirect ke halaman home
+      Navigator.pushReplacementNamed(context, '/home', arguments: accessToken);
+    } else {
+      // Gagal login
+      final responseData = jsonDecode(response.body);
+      final errorMessage = responseData['detail'];
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Error'),
+          content: Text(errorMessage),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,18 +95,26 @@ class masukPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Selamat Datang Di',
-              style: darkPrimaryTextStyle.copyWith(fontSize: 16),
-            )),
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Selamat Datang Di',
+            style: TextStyle(
+              fontSize: 16,
+              color:
+                  Colors.black, // Sesuaikan dengan warna teks yang diinginkan
+              fontWeight: FontWeight
+                  .bold, // Sesuaikan dengan ketebalan teks yang diinginkan
+            ),
+          ),
+        ),
         SizedBox(height: 8),
         Align(
-            alignment: Alignment.centerLeft,
-            child: Image(
-              image: AssetImage("../assets/gerum_text.png"),
-              width: 300,
-            ))
+          alignment: Alignment.centerLeft,
+          child: Image(
+            image: AssetImage('../assets/gerum_text.png'),
+            width: 300,
+          ),
+        ),
       ],
     );
   }
@@ -112,44 +123,49 @@ class masukPage extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         child: Card(
-          // Wrap with Card widget
-          elevation: 4, // Add elevation for shadow effect
-          margin: EdgeInsets.symmetric(
-            horizontal: defaultMargin,
-          ),
+          elevation: 4,
+          margin: EdgeInsets.symmetric(horizontal: 40),
           child: Container(
-            padding: EdgeInsets.all(
-                20), // Add padding for space between card edges and content
+            padding: EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildHeader(),
                 SizedBox(height: 40),
-                buildTextField(
+                _buildTextField(
                   hint: 'Username',
                   obscureText: false,
                   prefixIcon: Icons.email,
-                  backgroundColor: primaryColor,
                 ),
                 SizedBox(height: 16),
-                buildTextField(
+                _buildTextField(
                   hint: 'Password',
                   obscureText: true,
                   prefixIcon: Icons.lock,
-                  backgroundColor: primaryColor,
                 ),
                 SizedBox(height: 4),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'belum punya akun?',
-                    style: darkPrimaryTextStyle,
+                    style: TextStyle(
+                      color: Colors
+                          .black, // Sesuaikan dengan warna teks yang diinginkan
+                      fontWeight: FontWeight
+                          .bold, // Sesuaikan dengan ketebalan teks yang diinginkan
+                    ),
                   ),
                 ),
                 SizedBox(height: 16),
-                buildButton(context, 'MASUK', () {
-                  redirectTo(context, '/home');
-                }, alertColor, primaryColor),
+                _buildButton(
+                  context,
+                  'MASUK',
+                  () => _login(context),
+                  // Sesuaikan dengan warna latar belakang tombol yang diinginkan
+                  Colors.white,
+                  Colors
+                      .green, // Sesuaikan dengan warna teks tombol yang diinginkan
+                ),
                 SizedBox(height: 16),
                 buildButton(context, 'DAFTAR', () {
                   redirectTo(context, '/daftar');
@@ -157,6 +173,56 @@ class masukPage extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required String hint,
+    required bool obscureText,
+    required IconData prefixIcon,
+  }) {
+    return TextField(
+      controller: obscureText ? _passwordController : _usernameController,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        hintText: hint,
+        filled: true,
+        fillColor: Colors
+            .white, // Sesuaikan dengan warna latar belakang teks yang diinginkan
+        prefixIcon: Icon(
+          prefixIcon,
+          color: Colors.black, // Sesuaikan dengan warna ikon yang diinginkan
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButton(
+    BuildContext context,
+    String title,
+    VoidCallback onPressed,
+    Color bgColor,
+    Color txtColor,
+  ) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.85,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          // primary: bgColor, // Sesuaikan dengan warna latar belakang tombol yang diinginkan
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+              color: txtColor), // Sesuaikan dengan warna teks yang diinginkan
         ),
       ),
     );
