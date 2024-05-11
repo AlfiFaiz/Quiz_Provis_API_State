@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => masukPage(),
         '/masuk': (context) => masukPage(),
         '/daftar': (context) => daftarPage(),
-        '/home': (context) => home(),
+        '/home': (context, {arguments}) => home(accessToken: arguments),
         '/proses': (context) => proses(),
         '/terimakasi': (context) => terimakasi(),
         '/tolak': (context) => tolak(),

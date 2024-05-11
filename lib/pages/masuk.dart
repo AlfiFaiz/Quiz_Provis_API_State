@@ -1,41 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:api/pages/home.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-const Color primaryColor = Color.fromARGB(255, 242, 255, 242);
-const Color darkPrimaryColor = Color.fromARGB(255, 0, 0, 0);
-const Color alertColor = Color.fromARGB(255, 102, 127, 59);
 
 void redirectTo(BuildContext context, String routeName) {
   Navigator.pushNamed(context, routeName);
 }
 
-void pindah(BuildContext context, String routeName, String accessToken) {
-  Navigator.pushReplacementNamed(context, routeName, arguments: accessToken);
+class masukPage extends StatefulWidget {
+  @override
+  _masukPageState createState() => _masukPageState();
 }
 
-Widget buildButton(BuildContext context, String title, VoidCallback onPressed,
-    Color bgColor, Color txtColor) {
-  return Container(
-    width: MediaQuery.of(context).size.width * 0.85,
-    child: OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        backgroundColor: bgColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        side: BorderSide(color: Color.fromARGB(255, 102, 127, 59)),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        title,
-        style: TextStyle(color: txtColor),
-      ),
-    ),
-  );
-}
-
-class masukPage extends StatelessWidget {
+class _masukPageState extends State<masukPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -58,7 +35,10 @@ class masukPage extends StatelessWidget {
       print('Access token: $accessToken');
 
       // Redirect ke halaman home
-      Navigator.pushReplacementNamed(context, '/home', arguments: accessToken);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => home(accessToken: accessToken)),
+      );
     } else {
       // Gagal login
       final responseData = jsonDecode(response.body);
@@ -227,4 +207,25 @@ class masukPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget buildButton(BuildContext context, String title, VoidCallback onPressed,
+    Color bgColor, Color txtColor) {
+  return Container(
+    width: MediaQuery.of(context).size.width * 0.85,
+    child: OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        backgroundColor: bgColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        side: BorderSide(color: Color.fromARGB(255, 102, 127, 59)),
+      ),
+      onPressed: onPressed,
+      child: Text(
+        title,
+        style: TextStyle(color: txtColor),
+      ),
+    ),
+  );
 }

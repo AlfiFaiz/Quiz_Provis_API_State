@@ -56,10 +56,10 @@ class terimakasi extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => home()),
-              );
+              // Navigator.push(
+              //   context,
+              //   // MaterialPageRoute(builder: (context) => home()),
+              // );
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(

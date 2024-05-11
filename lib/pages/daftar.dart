@@ -1,3 +1,4 @@
+import 'package:api/pages/masuk.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -137,7 +138,10 @@ class daftarPage extends StatelessWidget {
                   context,
                   'RESET',
                   () {
-                    // Tambahkan navigasi atau tindakan lainnya di sini
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => masukPage()),
+                    );
                   },
                   Colors
                       .transparent, // Sesuaikan dengan warna latar belakang tombol yang diinginkan
