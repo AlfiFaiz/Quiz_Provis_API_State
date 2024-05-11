@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:api/pages/keranjang.dart'; // Ganti dengan nama file home.dart yang sesuai
 
 const Color primaryColor = Color.fromARGB(255, 242, 255, 242);
 const Color darkPrimaryColor = Color.fromARGB(255, 0, 0, 0);
@@ -39,6 +40,13 @@ class Item {
   }
 }
 
+class CartItem {
+  final Item item;
+  int quantity;
+
+  CartItem({required this.item, this.quantity = 1});
+}
+
 class home extends StatefulWidget {
   final String accessToken;
 
@@ -50,6 +58,7 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   List<Item> items = [];
+  List<CartItem> cartItems = [];
 
   @override
   void initState() {
@@ -72,6 +81,18 @@ class _homeState extends State<home> {
     } else {
       // Handle error
     }
+  }
+
+  void addToCart(Item item) {
+    setState(() {
+      var existingItemIndex =
+          cartItems.indexWhere((cartItem) => cartItem.item.id == item.id);
+      if (existingItemIndex != -1) {
+        cartItems[existingItemIndex].quantity++;
+      } else {
+        cartItems.add(CartItem(item: item));
+      }
+    });
   }
 
   @override
@@ -110,7 +131,7 @@ class _homeState extends State<home> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: GestureDetector(
-                      child: toko(),
+                      child: Toko(),
                     ),
                   ),
                   Padding(
@@ -162,7 +183,19 @@ class _homeState extends State<home> {
                             height: 50,
                             fit: BoxFit.cover,
                           ),
-                          trailing: Text('\Rp${items[index].price.toString()}'),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('\Rp${items[index].price.toString()}'),
+                              SizedBox(width: 10),
+                              IconButton(
+                                icon: Icon(Icons.add_shopping_cart),
+                                onPressed: () {
+                                  addToCart(items[index]);
+                                },
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -174,18 +207,42 @@ class _homeState extends State<home> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.shopping_cart),
-        backgroundColor: alertColor,
+      floatingActionButton: Stack(
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartPage(cartItems: cartItems),
+                ),
+              );
+            },
+            child: Icon(Icons.shopping_cart),
+            backgroundColor: alertColor,
+          ),
+          if (cartItems.isNotEmpty)
+            Positioned(
+              right: 8,
+              top: 8,
+              child: CircleAvatar(
+                backgroundColor: Colors.red,
+                radius: 10,
+                child: Text(
+                  cartItems.length.toString(),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
 
-class toko extends StatelessWidget {
-  const toko({Key? key}) : super(key: key);
+class Toko extends StatelessWidget {
+  const Toko({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -201,8 +258,7 @@ class toko extends StatelessWidget {
               child: Image.network(
                 '../assets/toko.jpg', // Ganti dengan URL gambar Anda.
                 height: 130,
-                fit: BoxFit
-                    .cover, // Agar gambar diisi dengan baik dalam ukuran yang tersedia.
+                fit: BoxFit.cover,
               ),
             ),
           ),
