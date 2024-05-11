@@ -86,11 +86,8 @@ class home extends StatefulWidget {
 }
 
 class _HomeState extends State<home> {
-  int _selectedIndex = 0;
   void _selectTab(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() {});
   }
 
   @override
@@ -224,47 +221,417 @@ class daftarmenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: primaryColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+    return GestureDetector(
+      onTap: () {
+        // Tambahkan logika perpindahan halaman di sini
+        // Misalnya:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => detailmenu()),
+        );
+      },
+      child: Card(
+        color: primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 5,
+        child: Row(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                bottomLeft: Radius.circular(15.0),
+              ),
+              child: Image.network(
+                '../assets/ayam_geprek.png', // Ganti dengan URL gambar Anda.
+                height: 130,
+                width: 140,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Ayam geprek',
+                    style: darkPrimaryTextStyle.copyWith(
+                        fontSize: 18, fontWeight: bold),
+                  ),
+                  Text(
+                    'Deskripsi',
+                    style: darkPrimaryTextStyle.copyWith(fontWeight: medium),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      elevation: 5,
-      child: Row(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              bottomLeft: Radius.circular(15.0),
-            ),
-            child: Image.network(
-              '../assets/ayam_geprek.png', // Replace with your image URL.
-              height: 130,
-              width: 140,
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
+    );
+  }
+}
+
+class detailmenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Column(
+        children: [
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Ayam geprek',
-                  style: darkPrimaryTextStyle.copyWith(
-                      fontSize: 18, fontWeight: bold),
-                ),
-                Text(
-                  'Deskrips',
-                  style: darkPrimaryTextStyle.copyWith(fontWeight: medium),
-                ),
-              ],
+            child: Container(
+              width: 375,
+              height: 650,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(color: Color(0xFFF2FFF2)),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 16,
+                    top: 74,
+                    child: Container(
+                      width: 350,
+                      padding: const EdgeInsets.only(
+                        top: 17,
+                        left: 14,
+                        right: 14,
+                        bottom: 15,
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        shadows: [
+                          BoxShadow(
+                            color: Color(0x3F000000),
+                            blurRadius: 15,
+                            offset: Offset(0, 0),
+                            spreadRadius: -3,
+                          )
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 181,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      '../assets/ayam_geprek.png'), // Ganti dengan path gambar Anda
+                                  fit: BoxFit
+                                      .cover, // Sesuaikan dengan kebutuhan Anda
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 15,
+                    top: 298,
+                    child: Container(
+                      width: 350,
+                      padding: const EdgeInsets.only(
+                        top: 22,
+                        left: 14,
+                        right: 23,
+                        bottom: 136,
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        shadows: [
+                          BoxShadow(
+                            color: Color(0x3F000000),
+                            blurRadius: 15,
+                            offset: Offset(0, 0),
+                            spreadRadius: -3,
+                          )
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Ayam Geprek Gerum',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                    letterSpacing: 0.20,
+                                  ),
+                                ),
+                                const SizedBox(width: 42),
+                                Text(
+                                  'Rp.12.000,00.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                    letterSpacing: 0.14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'deskripsinya....',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                              letterSpacing: 0.12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 21,
+                    top: 32,
+                    child: Container(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(width: 20),
+                          Text(
+                            'Ayam Geprek',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w700,
+                              height: 0,
+                              letterSpacing: 0.20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+          bawah(),
         ],
       ),
+    );
+  }
+}
+
+class bawah extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 430,
+          height: 122,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x3F000000),
+                blurRadius: 15,
+                offset: Offset(0, 0),
+                spreadRadius: 0,
+              )
+            ],
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                left: 275.50,
+                top: 122,
+                child: Container(
+                  width: 5,
+                  height: 5,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFB3CAD5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 284.50,
+                top: 122,
+                child: Container(
+                  width: 5,
+                  height: 5,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFB3CAD5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 293.50,
+                top: 122,
+                child: Container(
+                  width: 5,
+                  height: 5,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFB3CAD5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 302.50,
+                top: 122,
+                child: Container(
+                  width: 5,
+                  height: 5,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFB3CAD5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 311.50,
+                top: 122,
+                child: Container(
+                  width: 5,
+                  height: 5,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFB3CAD5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 25,
+                top: 40,
+                child: Container(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Total Harga',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Rp. 12.000,00.',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w700,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 68),
+                      TextButton(
+                        onPressed: () {
+                          // Tambahkan logika ketika tombol ditekan di sini
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.all(10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                                color: Color.fromARGB(255, 3, 107,
+                                    7)), // Tambahkan border jika diperlukan
+                          ),
+                        ),
+                        child: Text(
+                          'Tambah Ke Keranjang',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
