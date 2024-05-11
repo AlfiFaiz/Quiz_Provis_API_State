@@ -9,7 +9,7 @@ class prosesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Delay navigation to terima kasih page after 3 seconds
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -48,7 +48,7 @@ class prosesPage extends StatelessWidget {
             ),
           ),
           Image.asset(
-            'assets/proses.png', // Ubah sesuai dengan nama dan path gambar
+            '../assets/proses.png', // Ubah sesuai dengan nama dan path gambar
             width: 350,
             height: 250,
           ),
@@ -63,7 +63,7 @@ class prosesPage extends StatelessWidget {
             ),
           ),
           Image.asset(
-            'assets/proses_bar.png', // Ubah sesuai dengan nama dan path gambar
+            '../assets/proses_bar.png', // Ubah sesuai dengan nama dan path gambar
             width: 650,
             height: 65,
           ),

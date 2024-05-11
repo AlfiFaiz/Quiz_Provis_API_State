@@ -1,7 +1,6 @@
+import 'package:api/pages/proses_pesanan.dart';
 import 'package:flutter/material.dart';
 import 'package:api/pages/home.dart';
-import 'package:api/pages/keranjang.dart';
-import 'package:api/pages/terima_kasih.dart';
 
 class PaymentPage extends StatelessWidget {
   final List<CartItem> cartItems;
@@ -53,7 +52,7 @@ class PaymentPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          terimakasi(accessToken: accessToken)),
+                          prosesPage(accessToken: accessToken)),
                 );
               },
               style: ElevatedButton.styleFrom(
