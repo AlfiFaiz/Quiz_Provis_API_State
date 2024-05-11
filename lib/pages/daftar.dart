@@ -1,3 +1,8 @@
+/* 
+'Mhs 1:  [2207045, MUHAMMAD ALFI FAIZ]'  
+'Mhs 2:  [2206131,DEFRIZAL YAHDIYAN RISYAD]',
+*/
+
 import 'package:api/pages/masuk.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -128,10 +133,10 @@ class daftarPage extends StatelessWidget {
                   context,
                   'KONFIRMASI',
                   () => _register(context),
+
+                  Colors.white,
                   Colors
-                      .green, // Sesuaikan dengan warna latar belakang tombol yang diinginkan
-                  Colors
-                      .white, // Sesuaikan dengan warna teks tombol yang diinginkan
+                      .green, // Sesuaikan dengan warna latar belakang tombol yang diinginkan // Sesuaikan dengan warna teks tombol yang diinginkan
                 ),
                 SizedBox(height: 16),
                 _buildButton(

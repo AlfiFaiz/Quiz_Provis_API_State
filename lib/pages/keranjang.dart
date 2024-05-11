@@ -1,3 +1,8 @@
+/* 
+'Mhs 1:  [2207045, MUHAMMAD ALFI FAIZ]'  
+'Mhs 2:  [2206131,DEFRIZAL YAHDIYAN RISYAD]',
+*/
+
 import 'package:flutter/material.dart';
 import 'package:api/pages/bayar.dart'; // Sesuaikan dengan path yang benar
 import 'package:api/pages/home.dart'; // Sesuaikan dengan path yang benar
@@ -26,6 +31,26 @@ class _CartPageState extends State<CartPage> {
       totalPrice += cartItem.item.price * cartItem.quantity;
     }
     return totalPrice;
+  }
+
+  void navigateToPaymentPage() {
+    if (calculateTotalPrice() > 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PaymentPage(
+            cartItems: widget.cartItems,
+            accessToken: widget.accessToken,
+          ),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Keranjang belanja masih kosong!'),
+        ),
+      );
+    }
   }
 
   @override
@@ -131,14 +156,7 @@ class _CartPageState extends State<CartPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pop(context); // Kembali ke halaman sebelumnya (Home)
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PaymentPage(
-                    cartItems: widget.cartItems,
-                    accessToken: widget.accessToken)),
-          );
+          navigateToPaymentPage();
         },
         label: Text('Pembayaran'),
         icon: Icon(Icons.payment),

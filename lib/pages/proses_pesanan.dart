@@ -1,3 +1,8 @@
+/* 
+'Mhs 1:  [2207045, MUHAMMAD ALFI FAIZ]'  
+'Mhs 2:  [2206131,DEFRIZAL YAHDIYAN RISYAD]',
+*/
+
 import 'package:flutter/material.dart';
 import 'package:api/pages/terima_kasih.dart';
 

@@ -1,7 +1,11 @@
+/* 
+'Mhs 1:  [2207045, MUHAMMAD ALFI FAIZ]'  
+'Mhs 2:  [2206131,DEFRIZAL YAHDIYAN RISYAD]',
+*/
+
 import 'package:api/pages/daftar.dart';
 import 'package:api/pages/home.dart';
 import 'package:api/pages/masuk.dart';
-import 'package:api/pages/proses_pesanan.dart';
 import 'package:api/pages/terima_kasih.dart';
 import 'package:api/pages/tolak.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +26,6 @@ class MyApp extends StatelessWidget {
         '/masuk': (context) => masukPage(),
         '/daftar': (context) => daftarPage(),
         '/home': (context, {arguments}) => home(accessToken: arguments),
-        // '/proses': (context) => proses(),
         '/terimakasi': (context, {arguments}) =>
             terimakasi(accessToken: arguments),
         '/tolak': (context) => tolak(),
