@@ -1,28 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const FigmaToCodeApp());
-}
-
-class FigmaToCodeApp extends StatelessWidget {
-  const FigmaToCodeApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFFF2FFF2),
-      ),
-      home: Scaffold(
-        body: Center(
-          child: StatusPesanan(),
-        ),
-      ),
-    );
-  }
-}
-
-class StatusPesanan extends StatelessWidget {
+class terimakasi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -85,19 +63,23 @@ class StatusPesanan extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8), // Rounded corners
               ),
               padding: EdgeInsets.zero,
-              
             ),
             child: Ink(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFF093128), Color(0xFF667F3B), Color(0xFFA4B938)], // Gradient colors
+                  colors: [
+                    Color(0xFF093128),
+                    Color(0xFF667F3B),
+                    Color(0xFFA4B938)
+                  ], // Gradient colors
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
                 borderRadius: BorderRadius.circular(8), // Rounded corners
               ),
               child: Container(
-                constraints: BoxConstraints(minWidth: 200, minHeight: 40), // Button size
+                constraints:
+                    BoxConstraints(minWidth: 200, minHeight: 40), // Button size
                 alignment: Alignment.center,
                 child: Text(
                   'Kembali ke Halaman Awal',

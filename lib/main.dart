@@ -1,6 +1,9 @@
 import 'package:api/pages/daftar.dart';
 import 'package:api/pages/home.dart';
 import 'package:api/pages/masuk.dart';
+import 'package:api/pages/proses_pesanan.dart';
+import 'package:api/pages/terima_kasih.dart';
+import 'package:api/pages/tolak.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +22,9 @@ class MyApp extends StatelessWidget {
         '/masuk': (context) => masukPage(),
         '/daftar': (context) => daftarPage(),
         '/home': (context) => home(),
+        '/proses': (context) => proses(),
+        '/terimakasi': (context) => terimakasi(),
+        '/tolak': (context) => tolak(),
       },
     );
   }
