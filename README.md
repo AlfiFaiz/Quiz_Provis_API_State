@@ -1,16 +1,14 @@
-# api
+# Quiz Provis: Web API & State Management
 
-A new Flutter project.
+## 'Mhs 1:  [2207045, MUHAMMAD ALFI FAIZ]'  
+## 'Mhs 2:  [2206131,DEFRIZAL YAHDIYAN RISYAD]',
 
-## Getting Started
+Dokumentasi hasil Screenshot
+### Page Masuk
+![image](https://github.com/AlfiFaiz/Quiz_Provis_API_State/assets/134774589/accbf8f8-6406-471d-9c0b-efd8c5554ab4)
 
-This project is a starting point for a Flutter application.
+### Page Daftar
+![image](https://github.com/AlfiFaiz/Quiz_Provis_API_State/assets/134774589/35d235b4-9caf-45cb-a3a2-4d4712cf2f95)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### tampilan Home
+![image](https://github.com/AlfiFaiz/Quiz_Provis_API_State/assets/134774589/7eb68f79-9ffe-426c-aae2-56b80c1c9384)
