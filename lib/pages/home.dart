@@ -223,8 +223,6 @@ class daftarmenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Tambahkan logika perpindahan halaman di sini
-        // Misalnya:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => detailmenu()),

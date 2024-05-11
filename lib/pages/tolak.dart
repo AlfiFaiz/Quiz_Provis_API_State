@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:api/pages/home.dart';
 
 class tolak extends StatelessWidget {
   @override
@@ -55,8 +56,10 @@ class tolak extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // Navigasi kembali ke halaman utama (main.dart)
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => home()),
+              );
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
