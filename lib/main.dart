@@ -8,6 +8,7 @@ import 'package:api/pages/home.dart';
 import 'package:api/pages/masuk.dart';
 import 'package:api/pages/terima_kasih.dart';
 import 'package:api/pages/tolak.dart';
+import 'package:api/welcome.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => masukPage(),
+        '/': (context) => WelcomeScreen(),
         '/masuk': (context) => masukPage(),
         '/daftar': (context) => daftarPage(),
         '/home': (context, {arguments}) => home(accessToken: arguments),

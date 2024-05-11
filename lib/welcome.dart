@@ -1,15 +1,20 @@
+/* 
+'Mhs 1:  [2207045, MUHAMMAD ALFI FAIZ]'  
+'Mhs 2:  [2206131,DEFRIZAL YAHDIYAN RISYAD]',
+*/
+
 import 'package:flutter/material.dart';
-import 'main.dart'; // Import HomeScreen from main.dart
+import 'package:api/pages/masuk.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Delay navigation for 5 seconds
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 3), () {
       // Navigate to HomeScreen defined in main.dart
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => masukPage()),
       );
     });
 
@@ -26,15 +31,19 @@ class WelcomeScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              left: MediaQuery.of(context).size.width / 2 - 215, // Setengah dari lebar layar dikurangi setengah dari lebar container (430/2)
-              top: MediaQuery.of(context).size.height / 2 - 466, // Setengah dari tinggi layar dikurangi setengah dari tinggi container (932/2)
+              left: MediaQuery.of(context).size.width / 2 -
+                  215, // Setengah dari lebar layar dikurangi setengah dari lebar container (430/2)
+              top: MediaQuery.of(context).size.height / 2 -
+                  466, // Setengah dari tinggi layar dikurangi setengah dari tinggi container (932/2)
               child: Container(
                 width: 430, // Lebar container
                 height: 932, // Tinggi container
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center, // Posisi teks di tengah secara vertikal
-                  crossAxisAlignment: CrossAxisAlignment.center, // Posisi teks di tengah secara horizontal
+                  mainAxisAlignment: MainAxisAlignment
+                      .center, // Posisi teks di tengah secara vertikal
+                  crossAxisAlignment: CrossAxisAlignment
+                      .center, // Posisi teks di tengah secara horizontal
                   children: [
                     Text(
                       'Selamat Datang di',
