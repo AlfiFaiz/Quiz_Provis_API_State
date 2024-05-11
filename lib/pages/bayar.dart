@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:api/pages/home.dart';
 import 'package:api/pages/keranjang.dart';
-
-void redirectTo(BuildContext context, String routeName) {
-  Navigator.pushNamed(context, routeName);
-}
+import 'package:api/pages/terima_kasih.dart';
 
 class PaymentPage extends StatelessWidget {
   final List<CartItem> cartItems;
+  final String accessToken; // Tambahkan parameter accessToken
 
-  const PaymentPage({Key? key, required this.cartItems}) : super(key: key);
+  const PaymentPage(
+      {Key? key, required this.cartItems, required this.accessToken})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +47,52 @@ class PaymentPage extends StatelessWidget {
               'Rp $totalPrice',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            buildButton(context, 'BAYAR', () {
-              redirectTo(context, '/proses');
-            }, Colors.transparent, alertColor),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          terimakasi(accessToken: accessToken)),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8), // Rounded corners
+                ),
+                padding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent, // Transparent background
+                shadowColor: alertColor, // Shadow color
+                elevation: 0, // No elevation
+              ),
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF093128),
+                      Color(0xFF667F3B),
+                      Color(0xFFA4B938)
+                    ], // Gradient colors
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(8), // Rounded corners
+                ),
+                child: Container(
+                  constraints: BoxConstraints(
+                      minWidth: 200, minHeight: 40), // Button size
+                  alignment: Alignment.center,
+                  child: Text(
+                    'BAYAR',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white, // Text color
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

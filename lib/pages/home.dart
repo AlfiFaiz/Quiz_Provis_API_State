@@ -214,7 +214,8 @@ class _homeState extends State<home> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CartPage(cartItems: cartItems),
+                  builder: (context) => CartPage(
+                      cartItems: cartItems, accessToken: widget.accessToken),
                 ),
               );
             },

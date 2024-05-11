@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:api/pages/home.dart';
-import 'package:api/pages/bayar.dart';
+import 'package:api/pages/bayar.dart'; // Sesuaikan dengan path yang benar
+import 'package:api/pages/home.dart'; // Sesuaikan dengan path yang benar
 
 class CartPage extends StatefulWidget {
   final List<CartItem> cartItems;
+  final String accessToken; // Tambahkan parameter accessToken
 
-  const CartPage({Key? key, required this.cartItems}) : super(key: key);
+  const CartPage({Key? key, required this.cartItems, required this.accessToken})
+      : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();
@@ -133,7 +135,9 @@ class _CartPageState extends State<CartPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => PaymentPage(cartItems: widget.cartItems)),
+                builder: (context) => PaymentPage(
+                    cartItems: widget.cartItems,
+                    accessToken: widget.accessToken)),
           );
         },
         label: Text('Pembayaran'),

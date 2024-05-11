@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:api/pages/home.dart';
+import 'package:flutter/material.dart';
 
 class terimakasi extends StatelessWidget {
+  final String accessToken;
+
+  const terimakasi({Key? key, required this.accessToken}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +39,7 @@ class terimakasi extends StatelessWidget {
             ),
           ),
           Image.network(
-            '../assets/terima_kasih.png',
+            'assets/terima_kasih.png', // Ubah sesuai dengan nama dan path gambar
             width: 350,
             height: 250,
           ),
@@ -50,20 +54,21 @@ class terimakasi extends StatelessWidget {
             ),
           ),
           Image.network(
-            '../assets/terima_kasih_bar.png',
+            'assets/terima_kasih_bar.png', // Ubah sesuai dengan nama dan path gambar
             width: 650,
             height: 65,
           ),
           ElevatedButton(
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   // MaterialPageRoute(builder: (context) => home()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => home(accessToken: accessToken)),
+              );
             },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // Rounded corners
+                borderRadius: BorderRadius.circular(8), // Sudut yang dibulatkan
               ),
               padding: EdgeInsets.zero,
             ),
@@ -74,21 +79,21 @@ class terimakasi extends StatelessWidget {
                     Color(0xFF093128),
                     Color(0xFF667F3B),
                     Color(0xFFA4B938)
-                  ], // Gradient colors
+                  ], // Warna gradien
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
-                borderRadius: BorderRadius.circular(8), // Rounded corners
+                borderRadius: BorderRadius.circular(8), // Sudut yang dibulatkan
               ),
               child: Container(
-                constraints:
-                    BoxConstraints(minWidth: 200, minHeight: 40), // Button size
+                constraints: BoxConstraints(
+                    minWidth: 200, minHeight: 40), // Ukuran tombol
                 alignment: Alignment.center,
                 child: Text(
                   'Kembali ke Halaman Awal',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white, // Text color
+                    color: Colors.white, // Warna teks
                     fontSize: 16,
                   ),
                 ),

@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:api/pages/terima_kasih.dart';
 
-class proses extends StatelessWidget {
+class prosesPage extends StatelessWidget {
+  final String accessToken;
+
+  const prosesPage({Key? key, required this.accessToken}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    // Delay navigation to terima kasih page after 3 seconds
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => terimakasi(accessToken: accessToken)),
+      );
+    });
+
     return Container(
       width: 400,
       height: 400,
@@ -33,8 +47,8 @@ class proses extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          Image.network(
-            '../assets/proses.png',
+          Image.asset(
+            'assets/proses.png', // Ubah sesuai dengan nama dan path gambar
             width: 350,
             height: 250,
           ),
@@ -48,8 +62,8 @@ class proses extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          Image.network(
-            '../assets/proses_bar.png',
+          Image.asset(
+            'assets/proses_bar.png', // Ubah sesuai dengan nama dan path gambar
             width: 650,
             height: 65,
           ),
